@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ff4f86" />
+    <meta name="description" content="Una disculpa tierna y con humor para Cata." />
+    <title>¿Me perdonas, Cata?</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='.9em' font-size='58'%3E💗%3C/text%3E%3C/svg%3E" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Pacifico&display=swap');
+
+      :root { --pink: #ff4f86; --deep: #35142a; --cream: #fff8f5; }
+      * { box-sizing: border-box; }
+      body { margin: 0; min-height: 100svh; overflow: hidden; background: #ffb9ce; color: var(--deep); font-family: Nunito, sans-serif; }
+      .hearts { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
+      .heart { position: absolute; color: rgba(255,255,255,.58); animation: drift linear infinite; }
+      @keyframes drift { from { transform: translateY(105vh) rotate(0); } to { transform: translateY(-12vh) rotate(25deg); } }
+      main { min-height: 100svh; display: grid; place-items: center; padding: 22px; background: radial-gradient(circle at 15% 18%, #fff6fb 0 6%, transparent 6.2%), radial-gradient(circle at 88% 84%, #ffe4ed 0 9%, transparent 9.2%), linear-gradient(150deg,#ff97b8,#ffcede 55%,#ffc9a8); }
+      .card { width: min(100%, 430px); text-align: center; padding: 27px 23px 24px; border-radius: 32px; background: rgba(255,255,255,.84); box-shadow: 0 22px 52px rgba(112,25,62,.22); border: 2px solid rgba(255,255,255,.7); backdrop-filter: blur(8px); }
+      .eyebrow { margin: 0 0 6px; font-size: .82rem; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; color: #b72c62; }
+      h1 { margin: 0; font-family: Pacifico, cursive; font-size: clamp(2.55rem, 12vw, 4.05rem); line-height: 1.12; color: #ef3f78; text-shadow: 0 3px #fff; }
+      .subtitle { margin: 12px auto 17px; max-width: 330px; font-size: 1.04rem; line-height: 1.4; font-weight: 800; }
+      .photo { display: block; width: min(100%, 245px); height: 205px; margin: 0 auto 20px; object-fit: cover; border-radius: 23px; border: 7px solid white; box-shadow: 0 8px 20px rgba(98,19,45,.16); }
+      .buttons { display: flex; gap: 13px; justify-content: center; align-items: center; }
+      button { min-width: 124px; cursor: pointer; border: 0; border-radius: 999px; padding: 14px 19px; font: 900 1.15rem Nunito, sans-serif; transition: transform .18s ease, box-shadow .18s ease; }
+      button:focus-visible { outline: 4px solid #671735; outline-offset: 3px; }
+      button:hover { transform: translateY(-3px) scale(1.03); }
+      #yes { color: white; background: var(--pink); box-shadow: 0 7px 0 #c92960, 0 11px 20px rgba(211,44,99,.24); }
+      #no { color: #5c2940; background: #ffe1ea; box-shadow: 0 7px 0 #edb4c6; }
+      .note { min-height: 23px; margin: 15px 0 0; font-size: .93rem; font-weight: 800; color: #a7345d; }
+      .modal { position: fixed; inset: 0; display: none; place-items: center; padding: 20px; background: rgba(51,12,35,.63); z-index: 4; }
+      .modal.open { display: grid; }
+      .modal-box { width: min(100%, 375px); overflow: hidden; border-radius: 27px; background: white; text-align: center; box-shadow: 0 22px 60px rgba(0,0,0,.35); animation: pop .26s ease-out; }
+      @keyframes pop { from { transform: scale(.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+      .modal-box img { width: 100%; height: 240px; object-fit: cover; display: block; }
+      .modal-copy { padding: 17px 19px 20px; }
+      .modal-copy h2 { margin: 0; color: #e83770; font: 2rem Pacifico, cursive; }
+      .modal-copy p { margin: 7px 0 15px; font-weight: 800; line-height: 1.35; }
+      #close { min-width: 0; padding: 10px 19px; color: #fff; background: #e83770; }
+      .success { display:none; }
+      .success.show { display:block; }
+      .success h1 { font-size: clamp(2rem, 10vw, 3.2rem); }
+      .success .photo { height: 185px; }
+      .confetti { position: fixed; top: -20px; z-index: 7; pointer-events: none; font-size: 1.5rem; animation: fall 2.8s linear forwards; }
+      @keyframes fall { to { transform: translate(var(--x), 108vh) rotate(720deg); opacity: 0; } }
+      @media (max-width: 365px) { .card { padding: 20px 16px; } .photo { height: 170px; width: 205px; } button { min-width: 105px; } }
+    </style>
+  </head>
+  <body>
+    <div class="hearts" aria-hidden="true" id="hearts"></div>
+    <main>
+      <section class="card" id="question" aria-labelledby="title">
+        <p class="eyebrow">Una disculpa oficial 💌</p>
+        <h1 id="title">¿Me perdonas?</h1>
+        <p class="subtitle">Cata, perdón por ser tan romántico e intenso. Prometo bajarle dos cambios… un poquito. 🥺</p>
+        <img class="photo" src="assets/gatito.png" alt="Gatito con mirada tierna" />
+        <div class="buttons">
+          <button id="yes" type="button">Sí 💖</button>
+          <button id="no" type="button">No 🙈</button>
+        </div>
+        <p class="note" id="note" aria-live="polite">Tu respuesta importa, aunque me dé nervios.</p>
+      </section>
+      <section class="card success" id="success" aria-live="polite">
+        <p class="eyebrow">¡Misión cumplida!</p>
+        <h1>¡Gracias, corazón de melón! 🍈</h1>
+        <p class="subtitle">Nunca más… te adoro. Prometo quererte con la intensidad justa (bueno, voy a intentarlo). 💘</p>
+        <img class="photo" src="assets/perrito.png" alt="Perrito feliz y sorprendido" />
+      </section>
+    </main>
+    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-box">
+        <img id="modal-image" src="assets/denegado.png" alt="Meme de reacción" />
+        <div class="modal-copy">
+          <h2 id="modal-title">¿Estás segura?</h2>
+          <p id="modal-text"></p>
+          <button id="close" type="button">Seguir pensando 💭</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      const tries = [
+        { image: 'assets/denegado.png', title: '¿Estás segura?', text: 'Igual acepto tu veredicto… pero este hámster quería apelar. 🥺' },
+        { image: 'assets/detente.png', title: 'Detente, Jochis', text: 'Mi nivel de dramatismo está subiendo. Aun así, puedes decir que no, de verdad. 💗' },
+        { image: 'assets/colapso.png', title: 'Colapso emocional', text: 'Último intento de meme. Si no, lo respeto y te debo una disculpa de verdad. 🤝' }
+      ];
+      let count = 0;
+      const no = document.querySelector('#no'), modal = document.querySelector('#modal'), note = document.querySelector('#note');
+      const showModal = () => {
+        const current = tries[Math.min(count, tries.length - 1)];
+        document.querySelector('#modal-image').src = current.image;
+        document.querySelector('#modal-title').textContent = current.title;
+        document.querySelector('#modal-text').textContent = current.text;
+        modal.classList.add('open');
+        count++;
+        if (count >= tries.length) { no.textContent = 'No, gracias'; note.textContent = 'Está bien: gracias por ser honesta. 💛'; }
+      };
+      no.addEventListener('click', showModal);
+      document.querySelector('#close').addEventListener('click', () => modal.classList.remove('open'));
+      modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('open'); });
+      document.querySelector('#yes').addEventListener('click', () => {
+        document.querySelector('#question').style.display = 'none';
+        document.querySelector('#success').classList.add('show');
+        for (let i = 0; i < 95; i++) {
+          const piece = document.createElement('span'); piece.className = 'confetti';
+          piece.textContent = ['💖','💗','💕','✨','🎉'][Math.floor(Math.random()*5)];
+          piece.style.left = Math.random()*100 + 'vw'; piece.style.setProperty('--x', (Math.random()*180-90)+'px');
+          piece.style.animationDelay = Math.random()*.7 + 's'; document.body.appendChild(piece);
+          setTimeout(() => piece.remove(), 3700);
+        }
+      });
+      const backdrop = document.querySelector('#hearts');
+      for (let i = 0; i < 16; i++) { const h = document.createElement('span'); h.className='heart'; h.textContent='♥'; h.style.left=(Math.random()*100)+'%'; h.style.fontSize=(15+Math.random()*25)+'px'; h.style.animationDuration=(8+Math.random()*11)+'s'; h.style.animationDelay=(-Math.random()*12)+'s'; backdrop.appendChild(h); }
+    </script>
+  </body>
+</html>
