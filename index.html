@@ -28,6 +28,8 @@
       button:hover { transform: translateY(-3px) scale(1.03); }
       #yes { color: white; background: var(--pink); box-shadow: 0 7px 0 #c92960, 0 11px 20px rgba(211,44,99,.24); }
       #no { color: #5c2940; background: #ffe1ea; box-shadow: 0 7px 0 #edb4c6; }
+      #no.dodge { animation: dodge .35s ease both; }
+      @keyframes dodge { 30% { transform: translateX(-36px) rotate(-5deg); } 68% { transform: translateX(42px) rotate(5deg); } 100% { transform: translateX(0); } }
       .note { min-height: 23px; margin: 15px 0 0; font-size: .93rem; font-weight: 800; color: #a7345d; }
       .modal { position: fixed; inset: 0; display: none; place-items: center; padding: 20px; background: rgba(51,12,35,.63); z-index: 4; }
       .modal.open { display: grid; }
@@ -74,15 +76,16 @@
         <div class="modal-copy">
           <h2 id="modal-title">¿Estás segura?</h2>
           <p id="modal-text"></p>
-          <button id="close" type="button">Seguir pensando 💭</button>
+          <button id="close" type="button">Ya, pero piénsalo 💭</button>
         </div>
       </div>
     </div>
     <script>
       const tries = [
-        { image: 'assets/denegado.png', title: '¿Estás segura?', text: 'Igual acepto tu veredicto… pero este hámster quería apelar. 🥺' },
-        { image: 'assets/detente.png', title: 'Detente, Jochis', text: 'Mi nivel de dramatismo está subiendo. Aun así, puedes decir que no, de verdad. 💗' },
-        { image: 'assets/colapso.png', title: 'Colapso emocional', text: 'Último intento de meme. Si no, lo respeto y te debo una disculpa de verdad. 🤝' }
+        { image: 'assets/denegado.png', title: '¿Estás segura?', text: '¿Pero segurísima nivel contraseña del banco? Este hámster solicita una apelación. 🥺' },
+        { image: 'assets/detente.png', title: 'DETENTE JOCHIS', text: 'El departamento anti-rechazo acaba de abrir una investigación muy seria. 🚨' },
+        { image: 'assets/colapso.png', title: 'Colapso emocional', text: 'Mi última neurona está haciendo una presentación de PowerPoint para defenderme. 😭' },
+        { image: 'assets/perdon.png', title: 'Ok, ok…', text: 'Esto es una talla, obvio. Pero mira esa carita y considera el “Sí”. 🫠' }
       ];
       let count = 0;
       const no = document.querySelector('#no'), modal = document.querySelector('#modal'), note = document.querySelector('#note');
@@ -92,8 +95,13 @@
         document.querySelector('#modal-title').textContent = current.title;
         document.querySelector('#modal-text').textContent = current.text;
         modal.classList.add('open');
+        no.classList.remove('dodge');
+        void no.offsetWidth;
+        no.classList.add('dodge');
         count++;
-        if (count >= tries.length) { no.textContent = 'No, gracias'; note.textContent = 'Está bien: gracias por ser honesta. 💛'; }
+        if (count === 2) { no.textContent = 'No po, porfi 😭'; note.textContent = 'El botón “No” está bastante dramático hoy.'; }
+        if (count === 3) { no.textContent = 'No, pero con cariño'; note.textContent = 'Último meme antes de declarar emergencia nacional.'; }
+        if (count >= tries.length) { no.textContent = 'No, gracias'; note.textContent = 'Prometo aceptar el veredicto… después de un mini colapso. 💛'; }
       };
       no.addEventListener('click', showModal);
       document.querySelector('#close').addEventListener('click', () => modal.classList.remove('open'));
