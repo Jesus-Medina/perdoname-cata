@@ -67,7 +67,7 @@
         <p class="eyebrow">¡Misión cumplida!</p>
         <h1>¡Gracias, corazón de melón! 🍈</h1>
         <p class="subtitle">Nunca más… te adoro. Prometo quererte con la intensidad justa (bueno, voy a intentarlo). 💘</p>
-        <img class="photo" src="assets/perrito.png" alt="Perrito feliz y sorprendido" />
+        <img class="photo" src="assets/gato-flor.png" alt="Gatito ofreciendo una flor" />
       </section>
     </main>
     <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
@@ -85,7 +85,7 @@
         { image: 'assets/denegado.png', title: '¿Estás segura?', text: '¿Pero segurísima nivel contraseña del banco? Este hámster solicita una apelación. 🥺' },
         { image: 'assets/detente.png', title: 'DETENTE JOCHIS', text: 'El departamento anti-rechazo acaba de abrir una investigación muy seria. 🚨' },
         { image: 'assets/colapso.png', title: 'Colapso emocional', text: 'Mi última neurona está haciendo una presentación de PowerPoint para defenderme. 😭' },
-        { image: 'assets/perdon.png', title: 'Ok, ok…', text: 'Esto es una talla, obvio. Pero mira esa carita y considera el “Sí”. 🫠' }
+        { image: 'assets/gato-saludo.png', title: 'Último argumento', text: 'El abogado gatuno presenta su mejor alegato: un saludito con patita. 🐾' }
       ];
       let count = 0;
       const no = document.querySelector('#no'), modal = document.querySelector('#modal'), note = document.querySelector('#note');
@@ -101,7 +101,7 @@
         count++;
         if (count === 2) { no.textContent = 'No po, porfi 😭'; note.textContent = 'El botón “No” está bastante dramático hoy.'; }
         if (count === 3) { no.textContent = 'No, pero con cariño'; note.textContent = 'Último meme antes de declarar emergencia nacional.'; }
-        if (count >= tries.length) { no.textContent = 'No, gracias'; note.textContent = 'Prometo aceptar el veredicto… después de un mini colapso. 💛'; }
+        if (count >= tries.length) { no.textContent = 'No, gracias'; note.textContent = 'Cuatro memes después: prometo aceptar el veredicto… tras un mini colapso. 💛'; }
       };
       no.addEventListener('click', showModal);
       document.querySelector('#close').addEventListener('click', () => modal.classList.remove('open'));
