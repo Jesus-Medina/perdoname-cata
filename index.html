@@ -101,7 +101,10 @@
         count++;
         if (count === 2) { no.textContent = 'No po, porfi 😭'; note.textContent = 'El botón “No” está bastante dramático hoy.'; }
         if (count === 3) { no.textContent = 'No, pero con cariño'; note.textContent = 'Último meme antes de declarar emergencia nacional.'; }
-        if (count >= tries.length) { no.textContent = 'No, gracias'; note.textContent = 'Cuatro memes después: prometo aceptar el veredicto… tras un mini colapso. 💛'; }
+        if (count >= tries.length) {
+          no.style.display = 'none';
+          note.textContent = 'Después de cuatro memes, solo queda una respuesta posible. 💘';
+        }
       };
       no.addEventListener('click', showModal);
       document.querySelector('#close').addEventListener('click', () => modal.classList.remove('open'));
